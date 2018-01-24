@@ -52,6 +52,6 @@ export class RegisterPage {
     alert.present();
   }
   validateEmail(){
-
+    
   }
 }
