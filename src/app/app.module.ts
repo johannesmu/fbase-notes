@@ -20,14 +20,16 @@ import { AngularFireModule } from 'angularfire2';
 import { FirebaseProvider } from './../providers/firebase/firebase';
 import { AuthenticationProvider } from '../providers/authentication/authentication';
 
-const firebaseConfig = {
-  apiKey: "AIzaSyC-_t_u6Ifv1DU8NIHWm7pJnQDobyNGaxA",
-  authDomain: "notes-1b515.firebaseapp.com",
-  databaseURL: "https://notes-1b515.firebaseio.com",
-  projectId: "notes-1b515",
-  storageBucket: "notes-1b515.appspot.com",
-  messagingSenderId: "284095236693"
-};
+import { Configuration } from '../configuration/configuration';
+
+// const firebaseConfig = {
+//   apiKey: "AIzaSyC-_t_u6Ifv1DU8NIHWm7pJnQDobyNGaxA",
+//   authDomain: "notes-1b515.firebaseapp.com",
+//   databaseURL: "https://notes-1b515.firebaseio.com",
+//   projectId: "notes-1b515",
+//   storageBucket: "notes-1b515.appspot.com",
+//   messagingSenderId: "284095236693"
+// };
 
 @NgModule({
   declarations: [
@@ -41,7 +43,8 @@ const firebaseConfig = {
   imports: [
     HttpClientModule,
     AngularFireDatabaseModule,
-    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireAuthModule,
+    AngularFireModule.initializeApp( Configuration.firebase ),
     BrowserModule,
     IonicModule.forRoot(MyApp),
   ],
