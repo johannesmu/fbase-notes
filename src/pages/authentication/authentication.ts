@@ -3,15 +3,10 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { ModalController } from 'ionic-angular';
-import { AlertController } from 'ionic-angular';
 
 import { TcmodalPage } from '../tcmodal/tcmodal';
-/**
- * Generated class for the AuthenticationPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+
+import { AuthenticationserviceProvider } from '../../providers/authenticationservice/authenticationservice';
 
 @IonicPage()
 @Component({
@@ -27,7 +22,7 @@ export class AuthenticationPage {
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
               private modalCtrl: ModalController,
-              private alertCtrl: AlertController,
+              private authservice: AuthenticationserviceProvider,
               private formBuilder: FormBuilder ) {
     //construct something
     this.registerForm = this.formBuilder.group({

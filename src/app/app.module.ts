@@ -4,24 +4,22 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-//import { ListPage } from '../pages/list/list';
 import { AuthenticationPage } from '../pages/authentication/authentication';
-//import { LoginPage } from '../pages/login/login';
-//import { RegisterPage } from '../pages/register/register';
 import { TcmodalPage } from '../pages/tcmodal/tcmodal';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-//import { FirebaseProvider } from '../providers/firebase/firebase';
+
 
 import { HttpClientModule } from '@angular/common/http';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireModule } from 'angularfire2';
-import { FirebaseProvider } from './../providers/firebase/firebase';
-import { AuthenticationProvider } from '../providers/authentication/authentication';
+
 
 import { Configuration } from '../configuration/configuration';
+import { AuthenticationserviceProvider } from '../providers/authenticationservice/authenticationservice';
+import { DataserviceProvider } from '../providers/dataservice/dataservice';
 
 
 @NgModule({
@@ -50,8 +48,8 @@ import { Configuration } from '../configuration/configuration';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    FirebaseProvider,
-    AuthenticationProvider
+    AuthenticationserviceProvider,
+    DataserviceProvider
   ]
 })
 export class AppModule {}
