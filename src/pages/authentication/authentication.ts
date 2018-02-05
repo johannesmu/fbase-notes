@@ -6,6 +6,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ModalController } from 'ionic-angular';
 //we use the tcmodal page as content for our modal
 import { TcmodalPage } from '../tcmodal/tcmodal';
+import { HomePage } from '../home/home';
 
 import { AuthenticationserviceProvider } from '../../providers/authenticationservice/authenticationservice';
 
@@ -27,7 +28,7 @@ export class AuthenticationPage {
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private modalCtrl: ModalController,
-              private authservice: AuthenticationserviceProvider,
+              public auth: AuthenticationserviceProvider,
               private formBuilder: FormBuilder ) {
     //validate register form
     this.registerForm = this.formBuilder.group({
@@ -81,5 +82,31 @@ export class AuthenticationPage {
       }
     });
     md.present();
+  }
+
+
+  register(){
+    let email = this.registerForm.value.email;
+    let password = this.registerForm.value.password;
+    this.auth.register(email, password)
+    .then( () => {
+        this.navCtrl.setRoot(HomePage);
+    },
+    (error) => {
+      console.log(error)
+    });
+
+  }
+
+  login(){
+    let email = this.loginForm.value.email;
+    let password = this.loginForm.value.password;
+    this.auth.login( email, password )
+    .then( () => {
+      this.navCtrl.setRoot(HomePage);
+    },
+    (error) => {
+      console.log(error);
+    });
   }
 }

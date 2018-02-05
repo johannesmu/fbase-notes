@@ -3,8 +3,12 @@ import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
+import firebase from 'firebase';
+import { Configuration } from '../configuration/configuration';
+
 import { HomePage } from '../pages/home/home';
 import { AuthenticationPage } from '../pages/authentication/authentication';
+import { LogoutPage } from '../pages/logout/logout';
 
 @Component({
   templateUrl: 'app.html'
@@ -24,7 +28,24 @@ export class MyApp {
       { title: 'Home', icon: 'home', component: HomePage },
       { title: 'Sign In', icon: 'log-in', component: AuthenticationPage }
     ];
-
+    firebase.initializeApp( Configuration.firebase );
+    const unsubscribe = firebase.auth().onAuthStateChanged( user => {
+      if (!user) {
+        this.rootPage = AuthenticationPage;
+        this.pages = [
+          { title: 'Home', icon: 'home', component: HomePage },
+          { title: 'Sign In', icon: 'log-in', component: AuthenticationPage }
+        ];
+        unsubscribe();
+      } else {
+        this.rootPage = HomePage;
+        this.pages = [
+          { title: 'Home', icon: 'home', component: HomePage },
+          { title: 'Logout', icon: 'log-out', component: LogoutPage }
+        ];
+        unsubscribe();
+      }
+    });
   }
 
   initializeApp() {

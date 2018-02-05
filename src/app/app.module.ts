@@ -6,15 +6,14 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { AuthenticationPage } from '../pages/authentication/authentication';
 import { TcmodalPage } from '../pages/tcmodal/tcmodal';
+import { LogoutPage } from '../pages/logout/logout';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 
 import { HttpClientModule } from '@angular/common/http';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
-import { AngularFireAuthModule } from 'angularfire2/auth';
-import { AngularFireModule } from 'angularfire2';
+
 
 
 import { Configuration } from '../configuration/configuration';
@@ -26,14 +25,12 @@ import { DataserviceProvider } from '../providers/dataservice/dataservice';
   declarations: [
     MyApp,
     HomePage,
+    LogoutPage,
     AuthenticationPage,
     TcmodalPage
   ],
   imports: [
     HttpClientModule,
-    AngularFireDatabaseModule,
-    AngularFireAuthModule,
-    AngularFireModule.initializeApp( Configuration.firebase ),
     BrowserModule,
     IonicModule.forRoot(MyApp),
   ],
@@ -42,6 +39,7 @@ import { DataserviceProvider } from '../providers/dataservice/dataservice';
     MyApp,
     HomePage,
     AuthenticationPage,
+    LogoutPage,
     TcmodalPage
   ],
   providers: [
