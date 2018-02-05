@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
+
 /**
  * Generated class for the TcmodalPage page.
  *
@@ -14,12 +15,14 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'tcmodal.html',
 })
 export class TcmodalPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  accept: boolean;
+  constructor(public navCtrl: NavController, public navParams: NavParams ) {
   }
 
   closeModal(){
     this.navCtrl.pop();
   }
+  
+  
 
 }

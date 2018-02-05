@@ -7,31 +7,5 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 @Injectable()
 export class FirebaseProvider {
-  authState: FirebaseAuthState = null;
-  constructor( public AF: AngularFireModule, public AFauth: AngularFireAuthModule, public AFdb: AngularFireDatabaseModule) {
-
-  }
-  async login(email,password){
-    try {
-      const result = await this.AFauth.auth.signInWithEmailAndPassword( email, password );
-      if (result) {
-        //this.navCtrl.setRoot('HomePage');
-      }
-    }
-    catch (e) {
-      console.error(e);
-    }
-  }
-  async register(email,password){
-    try {
-      const result = await this.AFauth.auth.createUser( email, password,()={} );
-      if (result) {
-        //this.navCtrl.setRoot('HomePage');
-        
-      }
-    }
-    catch (e) {
-      console.error(e);
-    }
-  }
+  
 }

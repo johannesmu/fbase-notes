@@ -4,9 +4,10 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
-import { LoginPage } from '../pages/login/login';
-import { RegisterPage } from '../pages/register/register';
+//import { ListPage } from '../pages/list/list';
+import { AuthenticationPage } from '../pages/authentication/authentication';
+//import { LoginPage } from '../pages/login/login';
+//import { RegisterPage } from '../pages/register/register';
 import { TcmodalPage } from '../pages/tcmodal/tcmodal';
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -22,22 +23,12 @@ import { AuthenticationProvider } from '../providers/authentication/authenticati
 
 import { Configuration } from '../configuration/configuration';
 
-// const firebaseConfig = {
-//   apiKey: "AIzaSyC-_t_u6Ifv1DU8NIHWm7pJnQDobyNGaxA",
-//   authDomain: "notes-1b515.firebaseapp.com",
-//   databaseURL: "https://notes-1b515.firebaseio.com",
-//   projectId: "notes-1b515",
-//   storageBucket: "notes-1b515.appspot.com",
-//   messagingSenderId: "284095236693"
-// };
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    ListPage,
-    LoginPage,
-    RegisterPage,
+    AuthenticationPage,
     TcmodalPage
   ],
   imports: [
@@ -52,9 +43,7 @@ import { Configuration } from '../configuration/configuration';
   entryComponents: [
     MyApp,
     HomePage,
-    ListPage,
-    LoginPage,
-    RegisterPage,
+    AuthenticationPage,
     TcmodalPage
   ],
   providers: [

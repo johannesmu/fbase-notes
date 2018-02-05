@@ -25,7 +25,8 @@ import { TcmodalPage } from '../tcmodal/tcmodal';
 export class RegisterPage {
   private email: string;
   private password: string;
-  private validation = {};
+  private tnc_accept: boolean;
+  private validation = {email: boolean,password: boolean,tnc: boolean};
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private modalCtrl: ModalController,
