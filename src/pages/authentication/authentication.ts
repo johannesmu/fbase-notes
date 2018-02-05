@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
+//we use a modal to show terms and conditions
 import { ModalController } from 'ionic-angular';
-
+//we use the tcmodal page as content for our modal
 import { TcmodalPage } from '../tcmodal/tcmodal';
 
 import { AuthenticationserviceProvider } from '../../providers/authenticationservice/authenticationservice';
@@ -16,15 +17,19 @@ import { AuthenticationserviceProvider } from '../../providers/authenticationser
 export class AuthenticationPage {
   loginForm : FormGroup;
   registerForm: FormGroup;
-  
-  public state: string = 'login';
-  public tnc_accept: boolean;
-  constructor(public navCtrl: NavController, 
+
+  //default form to show is login
+  private state: string = 'login';
+  public title: string = 'Sign In';
+  private tnc_accept: boolean = false;
+
+
+  constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private modalCtrl: ModalController,
               private authservice: AuthenticationserviceProvider,
               private formBuilder: FormBuilder ) {
-    //construct something
+    //validate register form
     this.registerForm = this.formBuilder.group({
       email: ['',Validators.compose([
           Validators.email,
@@ -37,6 +42,7 @@ export class AuthenticationPage {
                 ],
       tnc: [false,Validators.requiredTrue]
     });
+    //validate login form
     this.loginForm = this.formBuilder.group({
       email: ['',Validators.compose([
           Validators.email,
@@ -45,23 +51,35 @@ export class AuthenticationPage {
       ],
       password: ['',
         Validators.required
-      ] 
+      ]
     })
   }
 
   toggleForms(){
     if( this.state == 'login' ){
+      this.title = 'Sign Up';
       this.state = 'signup';
       this.loginForm.reset();
     }
     else{
+      this.title = 'Sign in';
       this.state = 'login';
       this.registerForm.reset();
     }
   }
   showTC(){
     //show TcmodalPage as a modal
-    let md = this.modalCtrl.create( TcmodalPage );
+    let tnc_data = { accept : this.tnc_accept };
+    let md = this.modalCtrl.create( TcmodalPage , tnc_data );
+    let self = this;
+    md.onDidDismiss( (data) => {
+      if( data.accept == true ){
+        self.tnc_accept = data.accept;
+      }
+      else{
+        self.tnc_accept = false;
+      }
+    });
     md.present();
   }
 }

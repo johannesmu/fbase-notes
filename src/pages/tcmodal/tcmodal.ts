@@ -1,13 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-
-/**
- * Generated class for the TcmodalPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -15,14 +7,20 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'tcmodal.html',
 })
 export class TcmodalPage {
-  accept: boolean;
-  constructor(public navCtrl: NavController, public navParams: NavParams ) {
-  }
+  accept: boolean = false;
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public viewCtrl: ViewController ) {
 
+  }
+  ionViewWillEnter() {
+    let checkbox = this.navParams.get('accept');
+    this.accept = checkbox;
+  }
   closeModal(){
-    this.navCtrl.pop();
+    let data = { accept: this.accept };
+    this.viewCtrl.dismiss(data);
+    //this.navCtrl.pop();
   }
-  
-  
-
 }
