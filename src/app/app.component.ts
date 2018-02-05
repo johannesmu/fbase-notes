@@ -16,7 +16,7 @@ import { LogoutPage } from '../pages/logout/logout';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = AuthenticationPage;
+  rootPage: any;
 
   pages: Array<{title: string, icon: string, component: any}>;
 
@@ -24,25 +24,26 @@ export class MyApp {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
-    this.pages = [
-      { title: 'Home', icon: 'home', component: HomePage },
-      { title: 'Sign In', icon: 'log-in', component: AuthenticationPage }
-    ];
+    // this.pages = [
+    //   { title: 'Home', icon: 'home', component: HomePage },
+    //   { title: 'Sign In', icon: 'log-in', component: AuthenticationPage }
+    // ];
     firebase.initializeApp( Configuration.firebase );
     const unsubscribe = firebase.auth().onAuthStateChanged( user => {
       if (!user) {
         this.rootPage = AuthenticationPage;
         this.pages = [
-          { title: 'Home', icon: 'home', component: HomePage },
           { title: 'Sign In', icon: 'log-in', component: AuthenticationPage }
         ];
+        this.uid = '';
         unsubscribe();
       } else {
         this.rootPage = HomePage;
         this.pages = [
-          { title: 'Home', icon: 'home', component: HomePage },
+          { title: 'Notes', icon: 'home', component: HomePage },
           { title: 'Logout', icon: 'log-out', component: LogoutPage }
         ];
+        this.uid = user.uid;
         unsubscribe();
       }
     });

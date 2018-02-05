@@ -53,7 +53,7 @@ export class AuthenticationPage {
       password: ['',
         Validators.required
       ]
-    })
+    });
   }
 
   toggleForms(){

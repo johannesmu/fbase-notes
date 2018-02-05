@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import firebase from 'firebase';
+import { Note } from '../../models/note';
 
 /*
   Generated class for the DataserviceProvider provider.
@@ -15,5 +16,6 @@ export class DataserviceProvider {
   constructor(public http: HttpClient) {
 
   }
-
+  getNotes(){}
+  createNote(){}
 }
