@@ -4,7 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 //we use a modal to show terms and conditions
 import { ModalController } from 'ionic-angular';
-//we use the tcmodal page as content for our modal
+//we use the tcmodal page as content for our modal to show the terms and conditions
 import { TcmodalPage } from '../tcmodal/tcmodal';
 import { HomePage } from '../home/home';
 

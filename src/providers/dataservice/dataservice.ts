@@ -12,10 +12,16 @@ import { Note } from '../../models/note';
 */
 @Injectable()
 export class DataserviceProvider {
-
+  notes: Array<Note>;
   constructor(public http: HttpClient) {
 
   }
   getNotes(){}
-  createNote(){}
+  createNote(title,text,color){
+    let item = new Note();
+    item.title = title;
+    item.note = text;
+    item.color = color;
+    item.created = new Date().getTime();
+  }
 }

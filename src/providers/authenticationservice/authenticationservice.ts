@@ -5,9 +5,19 @@ import firebase from 'firebase';
 
 @Injectable()
 export class AuthenticationserviceProvider {
-
+  userid: string;
   constructor() {
+    const unsubscribe = firebase.auth().onAuthStateChanged( user => {
+      if (!user) {
 
+        user.userid = '';
+        unsubscribe();
+      } else {
+      
+        this.userid = user.uid;
+        unsubscribe();
+      }
+    });
   }
   login( email: string, password: string ): Promise <any>{
     return firebase.auth().signInWithEmailAndPassword(email, password);

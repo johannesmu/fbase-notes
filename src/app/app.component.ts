@@ -15,7 +15,7 @@ import { LogoutPage } from '../pages/logout/logout';
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
-
+  uid:string;
   rootPage: any;
 
   pages: Array<{title: string, icon: string, component: any}>;
@@ -23,11 +23,6 @@ export class MyApp {
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
     this.initializeApp();
 
-    // used for an example of ngFor and navigation
-    // this.pages = [
-    //   { title: 'Home', icon: 'home', component: HomePage },
-    //   { title: 'Sign In', icon: 'log-in', component: AuthenticationPage }
-    // ];
     firebase.initializeApp( Configuration.firebase );
     const unsubscribe = firebase.auth().onAuthStateChanged( user => {
       if (!user) {
@@ -35,7 +30,7 @@ export class MyApp {
         this.pages = [
           { title: 'Sign In', icon: 'log-in', component: AuthenticationPage }
         ];
-        this.uid = '';
+        user.uid = '';
         unsubscribe();
       } else {
         this.rootPage = HomePage;
