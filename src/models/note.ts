@@ -2,12 +2,21 @@ export class Note{
   title: string;
   note: string;
   created: number;
-  color: string;
-  constructor( title, note, created, color){
+  color: any;
+  constructor( title, note){
     this.title = title;
     this.note = note;
-    this.created = created;
-    this.color = color;
+    this.created = new Date().getTime();
+    this.color = this.randomColor;
     return this;
+  }
+  randomColor(){
+    const h:string = <string> this.randomNumber(359);
+    const s:string = 50;
+    const l:string = 75;
+    return `hsl(${h},${s}%,${l}%)`;
+  }
+  randomNumber(limit){
+    return Math.round( Math.random() * limit );
   }
 }

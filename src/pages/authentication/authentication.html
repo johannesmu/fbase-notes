@@ -81,6 +81,10 @@
       </ion-item>
 
       <ion-item>
+        <button ion-button clear (click)="showTC()">Read our terms and conditions</button>
+      </ion-item>
+      
+      <ion-item>
         <button ion-button color="primary" type="submit" full [disabled]="!registerForm.valid" (click)="register()" >
           Register
         </button>
@@ -93,8 +97,6 @@
         </p>
       </ion-item>
 
-      <ion-item>
-        <button ion-button clear (click)="showTC()">Read our terms and conditions</button>
-      </ion-item>
+
   </ion-list>
 </ion-content>

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import firebase from 'firebase';
+import { AuthenticationserviceProvider } from '../authenticationservice/authenticationservice';
 import { Note } from '../../models/note';
 
 /*
@@ -13,15 +14,16 @@ import { Note } from '../../models/note';
 @Injectable()
 export class DataserviceProvider {
   notes: Array<Note>;
-  constructor(public http: HttpClient) {
+  userid: string;
+  constructor(public http: HttpClient, private auth:AuthenticationserviceProvider) {
+    this.userid = auth.userid;
+    console.log(this.userid);
+  }
+  getNotes( userid ){
 
   }
-  getNotes(){}
-  createNote(title,text,color){
-    let item = new Note();
-    item.title = title;
-    item.note = text;
-    item.color = color;
-    item.created = new Date().getTime();
+  createNote(title,text){
+    let item = new Note(title,text);
+    return item;
   }
 }

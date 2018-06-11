@@ -7,6 +7,7 @@ import { HomePage } from '../pages/home/home';
 import { AuthenticationPage } from '../pages/authentication/authentication';
 import { TcmodalPage } from '../pages/tcmodal/tcmodal';
 import { LogoutPage } from '../pages/logout/logout';
+import { CreatenotePage } from '../pages/createnote/createnote';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -27,7 +28,8 @@ import { DataserviceProvider } from '../providers/dataservice/dataservice';
     HomePage,
     LogoutPage,
     AuthenticationPage,
-    TcmodalPage
+    TcmodalPage,
+    CreatenotePage
   ],
   imports: [
     HttpClientModule,
@@ -40,7 +42,8 @@ import { DataserviceProvider } from '../providers/dataservice/dataservice';
     HomePage,
     AuthenticationPage,
     LogoutPage,
-    TcmodalPage
+    TcmodalPage,
+    CreatenotePage
   ],
   providers: [
     StatusBar,

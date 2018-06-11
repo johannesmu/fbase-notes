@@ -69,8 +69,10 @@ export class AuthenticationPage {
     }
   }
   showTC(){
+    //show the Terms and Conditions modal
     //show TcmodalPage as a modal
     let tnc_data = { accept : this.tnc_accept };
+    //reference to the modal controller
     let md = this.modalCtrl.create( TcmodalPage , tnc_data );
     let self = this;
     md.onDidDismiss( (data) => {
