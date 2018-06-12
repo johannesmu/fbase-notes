@@ -16,11 +16,17 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 export class CreatenotePage {
   noteForm : FormGroup;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, private formBuilder: FormBuilder) {
+  //to store the form data ngModels
+  title: string;
+  text: string;
+  constructor(public navCtrl:NavController, public navParams:NavParams, public viewCtrl:ViewController, private formBuilder: FormBuilder) {
     //create validator for the note form
     this.noteForm = this.formBuilder.group({
       title: ['',Validators.compose([
-          Validators.required, Validators.minLength(4)
+        //the field is required
+          Validators.required,
+          //the minimum length is 4 characters
+          Validators.minLength(4)
         ])
       ],
       text: ['',Validators.compose([
@@ -34,9 +40,13 @@ export class CreatenotePage {
 
   }
   closeModal(){
+    //user cancels so don't pass any data
     this.viewCtrl.dismiss();
   }
   saveNote(){
-    this.viewCtrl.dismiss();
+    //get the note title and text from the page's ngModels
+    let data = {title: this.title, text: this.text};
+    //pass the data when the modal is closed
+    this.viewCtrl.dismiss( data );
   }
 }

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 
 import firebase from 'firebase';
 import { AuthenticationserviceProvider } from '../authenticationservice/authenticationservice';
+//import the note class to be able to use it to create new notes
 import { Note } from '../../models/note';
 
 /*
@@ -13,17 +14,26 @@ import { Note } from '../../models/note';
 */
 @Injectable()
 export class DataserviceProvider {
-  notes: Array<Note>;
-  userid: string;
+  public notes: Array<Note>;
+  public userid: string;
+  public path: string;
   constructor(public http: HttpClient, private auth:AuthenticationserviceProvider) {
-    this.userid = auth.userid;
-    console.log(this.userid);
-  }
-  getNotes( userid ){
 
   }
-  createNote(title,text){
-    let item = new Note(title,text);
-    return item;
+  getNotes(userid,callback){
+    //create path to access Notes
+    let path = '/userProfile/' + userid + '/notes/';
+    firebase.database().ref(path).once('value').then( (snapshot) => {
+      callback( snapshot.val() );
+    });
+  }
+  createNote(data,userid){
+    //create a new note usin the class in /models/note.ts and the data passed from home.ts
+    let item = new Note( data.title, data.text);
+    let path = '/userProfile/' +userid + '/notes/';
+    console.log(path);
+    //create a path to store notes under the current user's profile
+    //write the note object using its created string as a key (leave child blank and firebase will auto generate an id)
+    firebase.database().ref(path).child( <string> item.created).set(item);
   }
 }

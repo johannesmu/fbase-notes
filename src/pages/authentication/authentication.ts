@@ -75,7 +75,9 @@ export class AuthenticationPage {
     //reference to the modal controller
     let md = this.modalCtrl.create( TcmodalPage , tnc_data );
     let self = this;
+    //add a listener to modal when it's dismissed to receive data
     md.onDidDismiss( (data) => {
+    //if the checkbox in modal is ticked, tick the checkbox
       if( data.accept == true ){
         self.tnc_accept = data.accept;
       }
@@ -83,6 +85,7 @@ export class AuthenticationPage {
         self.tnc_accept = false;
       }
     });
+    //present the modal
     md.present();
   }
 

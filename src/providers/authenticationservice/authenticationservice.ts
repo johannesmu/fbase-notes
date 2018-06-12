@@ -5,8 +5,8 @@ import firebase from 'firebase';
 
 @Injectable()
 export class AuthenticationserviceProvider {
-  userid: string;
-  useremail: string;
+  public userid: string;
+  public useremail: string;
   constructor() {
       const unsubscribe = firebase.auth().onAuthStateChanged( user => {
         if (!user) {
@@ -20,6 +20,7 @@ export class AuthenticationserviceProvider {
         }
       });
   }
+  
   login( email: string, password: string ): Promise <any>{
     return firebase.auth().signInWithEmailAndPassword(email, password);
   }
@@ -27,6 +28,7 @@ export class AuthenticationserviceProvider {
   register(email: string, password: string): Promise<any> {
     return firebase.auth().createUserWithEmailAndPassword(email, password)
     .then( newUser => {
+      //write data under /userProfile using the user's id as key
       firebase.database().ref('/userProfile').child(newUser.uid).set({ email: email });
     });
   }

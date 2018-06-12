@@ -18,14 +18,14 @@
     <form [formGroup] = "noteForm">
       <ion-item>
         <ion-label stacked >Title</ion-label>
-        <ion-input [formControl]="noteForm.controls['title']" placeholder="Title of note (min 4 characters)" type="text" ></ion-input>
+        <ion-input [formControl]="noteForm.controls['title']" [(ngModel)]="title" placeholder="Title of note (min 4 characters)" type="text" ></ion-input>
       </ion-item>
       <ion-item *ngIf="!noteForm.controls.title.valid && noteForm.controls.title.dirty" class="validator-error">
         Minimum 4 characters
       </ion-item>
       <ion-item>
         <ion-label stacked>Note</ion-label>
-        <ion-textarea [formControl]="noteForm.controls['text']" placeholder="Take note"></ion-textarea>
+        <ion-textarea [formControl]="noteForm.controls['text']" [(ngModel)]="text" placeholder="Take note"></ion-textarea>
       </ion-item>
       <ion-item>
         <ion-row>
@@ -33,6 +33,7 @@
             <button ion-button full color="primary" (click)="closeModal()">Cancel</button>
           </ion-col>
           <ion-col>
+            <!--[disabled] = this button is disabled until the form is validated see the validator in the ts file for this page-->
             <button ion-button full color="primary" [disabled]="!noteForm.valid" (click)="saveNote()">Save Note</button>
           </ion-col>
         </ion-row>
