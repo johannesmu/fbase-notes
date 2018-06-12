@@ -11,7 +11,7 @@ export class Note{
     return this;
   }
   randomColor(){
-    const h:string = <string> this.randomNumber(359);
+    const h:number =  this.randomNumber(359);
     const s:string = 50;
     const l:string = 75;
     return `hsl(${h},${s}%,${l}%)`;
