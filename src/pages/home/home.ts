@@ -31,12 +31,7 @@ export class HomePage {
         this.dataservice.userid = user.uid;
         //get handle inside function for this.notes
         this.dataservice.getNotes(this.userid, (notes) => {
-          var count = Object.keys(notes).length;
-          var keys = Object.keys(notes);
-          for(let i:number =0; i< count; i++){
-            //console.log( notes[ keys[i] ] );
-            this.notes.push( notes[ keys[i] ]);
-          }
+          this.renderNotes(notes);
         });
       }
       else {
@@ -44,22 +39,47 @@ export class HomePage {
       }
     });
   }
-  openCreateModal(){
-    let md = this.modalCtrl.create( CreatenotePage );
+  openCreateModal(modeobj){
+    let md = this.modalCtrl.create( CreatenotePage, modeobj );
     //add a listener for when the modal is closed
     md.onDidDismiss( (data) => {
       //save the data to firebase usin the DataserviceProvider
-      this.dataservice.createNote(data,this.userid);
-      this.dataservice.getNotes(this.userid);
+      if(data){
+        if(data.mode == 'add'){
+          this.dataservice.createNote(data,this.userid);
+          this.dataservice.getNotes(this.userid,(notes) => {
+            this.renderNotes(notes);
+          });
+        }
+        if(data.mode == 'edit'){
+          this.dataservice.updateNote( data, this.userid, () => {
+            this.dataservice.getNotes( this.userid, (notes) => {
+              this.renderNotes(notes);
+            });
+          });
+        }
+      }
+
     });
     md.present();
   }
   renderNotes(notes){
+    //count the number of objects using the keys
     var count = Object.keys(notes).length;
-    var keys = Object.keys(notes);
+    //get the keys of objects and store in keys array
+    var keys: array<any> = Object.keys(notes);
+    this.notes = [];
     for(let i:number =0; i< count; i++){
-      //console.log( notes[ keys[i] ] );
       this.notes.push( notes[ keys[i] ]);
     }
+  }
+
+  delete( id ){
+    this.dataservice.deleteNote(id, this.userid , () => {
+      this.dataservice.getNotes(this.userid,(notes) => {
+        this.renderNotes(notes);
+      });
+    });
+
   }
 }

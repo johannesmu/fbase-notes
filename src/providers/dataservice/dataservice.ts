@@ -29,11 +29,19 @@ export class DataserviceProvider {
   }
   createNote(data,userid){
     //create a new note usin the class in /models/note.ts and the data passed from home.ts
-    let item = new Note( data.title, data.text);
+    let note = new Note( data.title, data.text);
     let path = '/userProfile/' +userid + '/notes/';
-    console.log(path);
     //create a path to store notes under the current user's profile
     //write the note object using its created string as a key (leave child blank and firebase will auto generate an id)
-    firebase.database().ref(path).child( <string> item.created).set(item);
+    firebase.database().ref(path).child( <string> note.created).set(note);
+  }
+  updateNote(data,userid,callback){
+    let notedata = {title: data.title, note: data.text, created: data.created }
+    let path = '/userProfile/' +userid + '/notes/' + (<string> data.created);
+    firebase.database().ref(path).update(notedata).then( callback() );
+  }
+  deleteNote( id, userid, callback ){
+    let path = '/userProfile/' +userid + '/notes/' + id;
+    firebase.database().ref(path).set(null).then( callback() );
   }
 }

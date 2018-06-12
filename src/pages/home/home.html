@@ -13,14 +13,14 @@
       <h3>Notes</h3>
     </ion-item>
     <ion-item>
-      <button ion-button (click)="openCreateModal()">
+      <button ion-button (click)="openCreateModal({mode:'add'})">
         Add Note
       </button>
     </ion-item>
 </ion-list>
 <ion-grid>
-  <ion-row wrap>
-    <ion-col col-md-6 col-sm-6 col-12 *ngFor="let note of notes">
+  <ion-row>
+    <ion-col col-md-6 col-sm-6 col-12 *ngFor="let note of notes; let i=index">
       <ion-card  [ngStyle]="{'background': note.color }">
         <ion-card-header>
             <h3>{{note.title}}</h3>
@@ -28,6 +28,20 @@
         <ion-card-content>
           {{note.note}}
         </ion-card-content>
+
+        <ion-row>
+          <ion-col>
+            <button ion-button small clear block color="light" (click)="openCreateModal({mode:'edit',title:note.title,text:note.note,created:note.created})">
+              <ion-icon name="create"></ion-icon>
+            </button>
+          </ion-col>
+          <ion-col>
+            <button ion-button small clear block color="light" (click)="delete(note.created)">
+              <ion-icon name="close"></ion-icon>
+            </button>
+          </ion-col>
+        </ion-row>
+
     </ion-card>
     </ion-col>
   </ion-row>

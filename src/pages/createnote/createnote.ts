@@ -19,6 +19,8 @@ export class CreatenotePage {
   //to store the form data ngModels
   title: string;
   text: string;
+  mode: string;
+  created: string;
   constructor(public navCtrl:NavController, public navParams:NavParams, public viewCtrl:ViewController, private formBuilder: FormBuilder) {
     //create validator for the note form
     this.noteForm = this.formBuilder.group({
@@ -34,6 +36,15 @@ export class CreatenotePage {
         ])
       ]
     });
+    //get mode
+    this.mode = navParams.data.mode;
+    console.log(this.mode);
+    if(navParams.data.mode == 'edit'){
+      this.mode = navParams.data.mode;
+      this.title = navParams.data.title;
+      this.text = navParams.data.text;
+      this.created = navParams.data.created;
+    }
   }
 
   ionViewDidLoad() {
@@ -44,8 +55,13 @@ export class CreatenotePage {
     this.viewCtrl.dismiss();
   }
   saveNote(){
-    //get the note title and text from the page's ngModels
-    let data = {title: this.title, text: this.text};
+    if( this.mode == 'add' ){
+      //get the note title and text from the page's ngModels
+      let data = {title: this.title, text: this.text, mode: this.mode };
+    }
+    if( this.mode == 'edit' ){
+      let data = {title: this.title, text: this.text, mode: this.mode, created: this.created }
+    }
     //pass the data when the modal is closed
     this.viewCtrl.dismiss( data );
   }
