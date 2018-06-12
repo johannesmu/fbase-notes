@@ -31,15 +31,14 @@ export class MyApp {
           { title: 'Sign In', icon: 'log-in', component: AuthenticationPage }
         ];
         user.uid = '';
-        unsubscribe();
-      } else {
+      }
+      else {
         this.rootPage = HomePage;
         this.pages = [
           { title: 'Notes', icon: 'home', component: HomePage },
           { title: 'Logout', icon: 'log-out', component: LogoutPage }
         ];
         this.uid = user.uid;
-        unsubscribe();
       }
     });
   }

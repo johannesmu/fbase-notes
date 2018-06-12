@@ -31,7 +31,10 @@ export class HomePage {
         this.dataservice.userid = user.uid;
         //get handle inside function for this.notes
         this.dataservice.getNotes(this.userid, (notes) => {
-          this.renderNotes(notes);
+          if(notes){
+            this.renderNotes(notes);
+          }
+
         });
       }
       else {
@@ -67,7 +70,7 @@ export class HomePage {
     //count the number of objects using the keys
     var count = Object.keys(notes).length;
     //get the keys of objects and store in keys array
-    var keys: array<any> = Object.keys(notes);
+    var keys = Object.keys(notes);
     this.notes = [];
     for(let i:number =0; i< count; i++){
       this.notes.push( notes[ keys[i] ]);

@@ -55,14 +55,15 @@ export class CreatenotePage {
     this.viewCtrl.dismiss();
   }
   saveNote(){
+    let data = {};
     if( this.mode == 'add' ){
       //get the note title and text from the page's ngModels
-      let data = {title: this.title, text: this.text, mode: this.mode };
+      data = {title: this.title, text: this.text, mode: this.mode };
     }
     if( this.mode == 'edit' ){
-      let data = {title: this.title, text: this.text, mode: this.mode, created: this.created }
+      data = {title: this.title, text: this.text, mode: this.mode, created: this.created }
     }
     //pass the data when the modal is closed
-    this.viewCtrl.dismiss( data );
+    this.viewCtrl.dismiss(data);
   }
 }
