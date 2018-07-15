@@ -1,7 +1,7 @@
 export class Note{
   title: string;
   note: string;
-  created: number;
+  created: string;
   color: any;
   constructor( title, note){
     this.title = title;
